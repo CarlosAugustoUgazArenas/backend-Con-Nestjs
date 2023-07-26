@@ -1,0 +1,52 @@
+EN PINCIPIO
+    Se importan librerias a usar el el ejemplo
+    npm i @nestjs/mongoose mongoose
+    npm i --save class-validator class-transformer
+
+Creacion
+    nest generate controller tasks --no-spec
+    nest generate service tasks --no-spec
+    nest generate service tasks --no-spec
+    
+Para la configuracion de un squema el siguiente ejemplo:
+    import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';: 
+    Aquí estamos importando las clases y funciones necesarias desde el módulo @nestjs/mongoose. 
+    Esto nos permitirá definir los esquemas de Mongoose y sus propiedades.
+
+    @Schema({ timestamps: true }): 
+    Esta línea define el esquema principal para la clase Task. { timestamps: true } es una opción que se establece en true, 
+    lo que significa que Mongoose agregará automáticamente campos createdAt y updatedAt a los documentos basados en este esquema, 
+    lo que indica cuándo se creó y modificó por última vez un registro.
+
+    export class Task { ... }: Aquí definimos la clase Task, que representa el esquema de datos para las tareas.
+
+    @Prop({ unique: true, require: true, trim: true }): Esta línea define la propiedad title de la tarea.
+    Las opciones especificadas dentro del decorador @Prop indican que este campo debe ser único (unique: true), requerido (require: true) 
+    y que los espacios en blanco al principio y al final deben recortarse (trim: true).
+
+    title: string;: Esta línea define la variable title como una cadena de texto.
+    Es el tipo de datos que se espera para el campo title de una tarea.
+
+    @Prop({ trim: true }): Esta línea define la propiedad description de la tarea.
+    La opción trim: true asegura que los espacios en blanco al principio y al final de la cadena de texto se recorten.
+
+    description: string;: Esta línea define la variable description como una cadena de texto.
+    Es el tipo de datos que se espera para el campo description de una tarea.
+
+    @Prop({ default: true }): Esta línea define la propiedad status de la tarea. La opción default: true establece que,
+    si no se proporciona un valor para status, se asignará automáticamente el valor true.
+
+    status: boolean;: Esta línea define la variable status como un valor booleano. Es el tipo de datos que se espera para el campo status de una tarea.
+
+    export const TaskSchema = SchemaFactory.createForClass(Task);: 
+    Finalmente, exportamos el esquema de Mongoose creado para la clase Task utilizando la función SchemaFactory.createForClass(Task). 
+    Esta función toma la clase Task y genera el esquema de Mongoose correspondiente, 
+    listo para ser utilizado en otras partes de la aplicación donde se necesite interactuar con la base de datos MongoDB.
+
+DTO: Esto es DATA TRANSFER OBJET
+    Sive para crear interfaces cuando se va a crear o actualizar un dato.
+    Ademas con la libreria class-validator podemos agregarle parametros de validacion a los datos
+
+PARA LA ENCRIPTACION DE CONTRASEÑAS
+    npm i bcryptjs 
+    npm i @types/bcryptjs -D
